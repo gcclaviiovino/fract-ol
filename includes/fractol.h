@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:00:07 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 16:48:39 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:00:45 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "libft.h"
 # include "mlx.h"
 
@@ -55,6 +57,9 @@ typedef struct s_fractal
 	t_image		image;
 	double		escape_val;
 	int			image_def;
+	double		shift_x;
+	double		shift_y;
+	double		zoom;
 	double		julia_x;
 	double		julia_y;
 }	t_fractal;
@@ -84,9 +89,13 @@ void		fractal_render(t_fractal *fractal);
 void		manage_pixel(double x, double y, t_fractal *fractal);
 void		show_pixel(int x, int y, t_image *img, int colour);
 void		def_data(t_fractal *fractal);
-void		mandelbrot_def(double x, double y, t_complex *z, t_complex *c);
+void		mandelbrot_def(double x, double y, t_complex *z, t_complex *c, t_fractal *fractal);
 void		julia_def(double x, double y, t_complex *z, t_complex *c, t_fractal *fractal);
 double		ft_atodec(char *str);
-//void		choose_fractal(t_fractal *fractal, double x, double y, t_complex z, t_complex c);
+void		events_init(t_fractal *fractal);
+int			manage_key(int key, t_fractal *fractal);
+int			manage_exit(t_fractal *fractal);
+int			manage_mouse(int button, int x, int y, t_fractal *fractal);
+int			manage_track(int x, int y, t_fractal *fractal);
 
 #endif
