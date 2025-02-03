@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:42:53 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 16:26:23 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/02 19:06:36 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	manage_pixel(double x, double y, t_fractal *fractal)
 
 	i = 0;
 	if (ft_strncmp(fractal->name, "Mandelbrot", 10) == 0)
-		mandelbrot_def(x, y, &z, &c);
+		mandelbrot_def(x, y, &z, &c, fractal);
 	else if (ft_strncmp(fractal->name, "Julia", 5) == 0)
 		julia_def(x, y, &z, &c, fractal);
 	while (i < fractal->image_def)

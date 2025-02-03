@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:15:18 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/01 15:24:37 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/02 19:05:26 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ void	fractal_init(t_fractal *fractal)
 		malloc_err();
 	}
 	fractal->image.pix_ptr = mlx_get_data_addr(fractal->image.image_ptr, &fractal->image.bytes_pp, &fractal->image.line_len, &fractal->image.endian);
-//	events_init(); //to do
+	events_init(fractal);
 	def_data(fractal);
 }

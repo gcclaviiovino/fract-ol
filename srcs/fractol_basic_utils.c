@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 21:02:03 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 17:22:09 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:04:57 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,18 @@ void	def_data(t_fractal *fractal)
 {
 	fractal->escape_val = 2 * 2;
 	fractal->image_def = 50;
-	
+	fractal->shift_x = 0;
+	fractal->shift_y = 0;
+	fractal->zoom = 1;
+}
+
+void	events_init(t_fractal *fractal)
+{
+	mlx_hook(fractal->mlx_window, KeyPress, KeyPressMask, manage_key, fractal);
+	mlx_hook(fractal->mlx_window, ButtonPress, ButtonPress, manage_mouse, fractal);
+	mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask, manage_exit, fractal);
+	if (ft_strncmp(fractal->name, "Julia", 5) == 0)
+		mlx_hook(fractal->mlx_window, MotionNotify, PointerMotionMask, manage_track, fractal);
 }
 
 double	ft_atodec(char *str)
