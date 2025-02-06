@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:48:27 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 17:22:48 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/03 16:09:57 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	main(int argc, char **argv)
 		fractal_render(&fractal);
 		mlx_loop(fractal.mlx_connect);
 	}
+//	else if (argc == 2 && (ft_strncmp(argv[1], "", lenfrattale)) == 0)
+		// fai e chiama funzione per altro frattale
 	else
 	{
 		ft_putstr_fd(ERROR_MESS, 2);

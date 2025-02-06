@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:59:28 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/01 15:42:40 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:10:43 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,23 @@ t_complex	c_square(t_complex z)
 	sq.real_x = (z.real_x * z.real_x) - (z.imaginary_y * z.imaginary_y);
 	sq.imaginary_y = 2 * (z.real_x * z.imaginary_y);
 	return (sq);
+}
+
+int		lin_interpol(int start_val, int end_val, double point)
+{
+	int	inter_val;
+
+	inter_val = start_val + (point * (end_val - start_val));
+	return (inter_val);
+}
+
+t_colour	ft_itoc(int hex)
+{
+	t_colour	colour;
+
+	colour.r = (hex >> 16) & 0xFF;
+	colour.g = (hex >> 8) & 0xFF;
+	colour.b = hex & 0xFF;
+	colour.val = hex;
+	return (colour);
 }

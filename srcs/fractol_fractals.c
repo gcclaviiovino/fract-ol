@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:15:10 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 19:54:33 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/05 14:31:20 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	julia_def(double x, double y, t_complex *z, t_complex *c, t_fractal *fracta
 	c->real_x = fractal->julia_x;
 	c->imaginary_y = fractal->julia_y;
 }
-/*
+
 void	gosper_def()
 {
 	
-}*/
+}

@@ -12,7 +12,7 @@ MLX = $(addprefix $(MLX_DIR)/, libmlx.a)
 
 SRCS = $(addprefix $(SRCS_DIR)/, fractol_basic_utils.c fractol_fractals.c \
 		fractol_init.c fractol_main.c fractol_math_utils.c fractol_render.c \
-		fractol_events.c)
+		fractol_events.c fractol_grading.c)
 
 OBJS = $(SRCS:.c=.o)
 OBJS := $(patsubst $(SRCS_DIR)/%,$(OBJS_DIR)/%,$(OBJS))

@@ -6,25 +6,62 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 22:48:29 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/01 22:56:09 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/06 19:23:22 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// Per avere un passaggio tra colori più smooth e rendere tutto meno 
-// un pugno nell'occhio bisogna aggiungere dei "colori intermedi".
+t_colour	blend(t_colour base_c, t_colour next_c, double inter_val)
+{
+	t_colour res_c;
+	
+	if (base_c.val == next_c.val)
+		return (base_c);
+	res_c.r = lin_interpol(base_c.r, next_c.r, inter_val);
+	res_c.g = lin_interpol(base_c.g, next_c.g, inter_val);
+	res_c.b = lin_interpol(base_c.b, next_c.b, inter_val);
+	res_c.val = (res_c.r << 16) | (res_c.g << 8) | res_c.b;
+//	printf("Base: #%02X%02X%02X, Next: #%02X%02X%02X, inter_val: %.2f -> Result: #%02X%02X%02X\n", base_c.r, base_c.g, base_c.b, next_c.r, next_c.g, next_c.b, inter_val, res_c.r, res_c.g, res_c.b);
+//	printf("val: %X\n", res_c.val);
+	return (res_c);
+}
 
-// Per fare ciò, ti tocca usare la "linear interpolation" su
-// ogni componente del colore (separatamente per r, g, b)...
-// Finalmente puoi usare la struct!!
+t_colour	colour_render(int i, t_palette *palette, t_fractal *fractal)
+{
+	double		i_norm;
+	int			index;
+	double		i_step;
+	double		keep_i;
+	int			steps;
 
-// Formula:
-// inter_val = start_val + ((step/tot_step) * (end_val - start_val))
+	i_norm = (double)i / (double)fractal->image_def;
+	steps = (palette->tot - 1);
+	keep_i = (i_norm * steps);
+	index = (int)(keep_i);
+	i_step = (keep_i - index);
+	return (blend(ft_itoc(palette->colours[index]), ft_itoc(palette->colours[index + 1]), i_step));
+}
 
-// Super simile a scaling() !!!
+t_colour	smooth_log(t_complex z, int i, t_fractal *fractal)
+{
+	double	zn;
+	double	nu;
+	double smooth_i;
 
-// Da decidere quanti step intermedi fare tra un colore significativamente
-// diverso e l'altro.
+	zn = (log((z.real_x * z.real_x) + (z.imaginary_y * z.imaginary_y)) / 2.0f);
+	nu = (log(zn / log(2)) / log(2));
+	smooth_i = i + 1 - nu;
+	return (colour_render((int)smooth_i, &fractal->palette, fractal));
+}
 
-// Buonanotte <33
+int		get_colour(t_complex z, int i, t_fractal *fractal)
+{
+	t_colour f_colour;
+
+	if (fractal->smooth)
+		f_colour = smooth_log(z, i, fractal);
+	else
+		f_colour = colour_render(i, &fractal->palette, fractal);
+	return (f_colour.val);
+}

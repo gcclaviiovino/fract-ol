@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:00:07 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 20:00:45 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/06 18:20:38 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # define HEIGHT 600
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
-# define R_COLOUR 0x047878 //verdino
-# define FORREST_GREEN 0x228B22
-# define ROYAL_BLUE 0x4169E1
-# define MAGENTA 0xFF00FF
+# define DEEP_BROWN 0x3E2F20
+# define WARM_CREAM 0xF5EED0
+# define YELLOWISH 0xF6EC0E
+# define LILAC 0x8E5BCE
 
 # include <stdio.h>
 # include <stdint.h>
@@ -31,6 +31,7 @@
 # include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <stdbool.h>
 # include "libft.h"
 # include "mlx.h"
 
@@ -49,6 +50,13 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct	s_palette
+{
+	int		val;
+	uint8_t	tot;
+	int		colours[6];
+}	t_palette;
+
 typedef struct s_fractal
 {
 	char		*name;
@@ -62,23 +70,17 @@ typedef struct s_fractal
 	double		zoom;
 	double		julia_x;
 	double		julia_y;
+	t_palette	palette;
+	bool		smooth;
 }	t_fractal;
 
-//typedef struct	s_colour //forse servirà
-//{
-//	uint8_t	r;
-//	uint8_t	g;
-//	uint8_t	b;
-//}	t_colour;
-
-//typedef	struct	s_palette
-//{
-//	t_colour	black;
-//	t_colour	white;
-//	t_colour	red;
-//	t_colour	green;
-//	t_colour	blue;
-//}	t_palette
+typedef struct	s_colour
+{
+	int		val;
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+}	t_colour;
 
 void		fractal_init(t_fractal *fractal);
 void		malloc_err(void);
@@ -97,5 +99,12 @@ int			manage_key(int key, t_fractal *fractal);
 int			manage_exit(t_fractal *fractal);
 int			manage_mouse(int button, int x, int y, t_fractal *fractal);
 int			manage_track(int x, int y, t_fractal *fractal);
+int			get_colour(t_complex z, int i, t_fractal *fractal);
+t_colour	smooth_log(t_complex z, int i, t_fractal *fractal);
+t_colour	colour_render(int i, t_palette *palette, t_fractal *fractal);
+t_colour	blend(t_colour base_c, t_colour next_c, double inter_val);
+void		palette_def(t_palette *palette, t_fractal *fractal);
+int			lin_interpol(int start_val, int end_val, double point);
+t_colour	ft_itoc(int hex);
 
 #endif

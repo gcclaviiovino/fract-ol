@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 18:42:52 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 20:05:39 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/06 20:04:01 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,25 @@ int	manage_key(int key, t_fractal *fractal)
 	if (key == XK_Escape)
 		manage_exit(fractal);
 	if (key == XK_Left)
-		fractal->shift_x += (0.5 * fractal->zoom);
-	else if (key == XK_Up)
-		fractal->shift_y -= (0.5 * fractal->zoom);
-	else if (key == XK_Right)
 		fractal->shift_x -= (0.5 * fractal->zoom);
-	else if (key == XK_Down)
+	else if (key == XK_Up)
 		fractal->shift_y += (0.5 * fractal->zoom);
+	else if (key == XK_Right)
+		fractal->shift_x += (0.5 * fractal->zoom);
+	else if (key == XK_Down)
+		fractal->shift_y -= (0.5 * fractal->zoom);
 	else if (key == XK_plus)
 		fractal->image_def += 10;
 	else if (key == XK_minus)
 		fractal->image_def -= 10;
+	else if (key == XK_Tab)
+	{
+		if (fractal->palette.val < 2)
+			fractal->palette.val += 1;
+		else
+			fractal->palette.val = 1;
+		palette_def(&fractal->palette, fractal);
+	}
 	fractal_render(fractal);
 	return (0);
 }

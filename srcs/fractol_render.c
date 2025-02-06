@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:42:53 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/02 19:06:36 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/06 19:22:45 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	manage_pixel(double x, double y, t_fractal *fractal)
 		z = c_sum(c_square(z), c);
 		if (((z.real_x * z.real_x) + (z.imaginary_y * z.imaginary_y)) > fractal->escape_val)
 		{
-			colour = (int)scaling(i, 0, fractal->image_def, FORREST_GREEN, MAGENTA); //fai funzioni per interpolare i colori
+			colour = get_colour(z, i, fractal);
 			show_pixel(x, y, &fractal->image, colour);
 			return ;
 		}
