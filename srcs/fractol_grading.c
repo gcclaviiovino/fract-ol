@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 22:48:29 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/06 19:23:22 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/17 14:02:36 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_colour	smooth_log(t_complex z, int i, t_fractal *fractal)
 	double	nu;
 	double smooth_i;
 
-	zn = (log((z.real_x * z.real_x) + (z.imaginary_y * z.imaginary_y)) / 2.0f);
+	zn = (log((z.rl_x * z.rl_x) + (z.im_y * z.im_y)) / 2.0f);
 	nu = (log(zn / log(2)) / log(2));
 	smooth_i = i + 1 - nu;
 	return (colour_render((int)smooth_i, &fractal->palette, fractal));

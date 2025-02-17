@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:00:07 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/06 18:20:38 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/17 14:12:08 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 
 typedef struct s_complex
 {
-	double	real_x;
-	double	imaginary_y;
+	double	rl_x;
+	double	im_y;
 }	t_complex;
 
 typedef struct s_image
@@ -72,6 +72,9 @@ typedef struct s_fractal
 	double		julia_y;
 	t_palette	palette;
 	bool		smooth;
+	bool		motion;
+	t_complex	max;
+	t_complex	min;
 }	t_fractal;
 
 typedef struct	s_colour
@@ -84,7 +87,7 @@ typedef struct	s_colour
 
 void		fractal_init(t_fractal *fractal);
 void		malloc_err(void);
-double		scaling(double num, double o_min, double o_max, double n_min, double n_max);
+double		scaling(double num, double o_max, double n_min, double n_max);
 t_complex	c_sum(t_complex z, t_complex z_sq);
 t_complex	c_square(t_complex z);
 void		fractal_render(t_fractal *fractal);
@@ -96,6 +99,8 @@ void		julia_def(double x, double y, t_complex *z, t_complex *c, t_fractal *fract
 double		ft_atodec(char *str);
 void		events_init(t_fractal *fractal);
 int			manage_key(int key, t_fractal *fractal);
+int			manage_some(int key, t_fractal *fractal);
+int			manage_more(int key, t_fractal *fractal);
 int			manage_exit(t_fractal *fractal);
 int			manage_mouse(int button, int x, int y, t_fractal *fractal);
 int			manage_track(int x, int y, t_fractal *fractal);

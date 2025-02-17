@@ -18,7 +18,7 @@ OBJS = $(SRCS:.c=.o)
 OBJS := $(patsubst $(SRCS_DIR)/%,$(OBJS_DIR)/%,$(OBJS))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g $(MLX_INC) $(LIBFT_INC) 
+CFLAGS = -O3 -Wall -Wextra -Werror -g $(MLX_INC) $(LIBFT_INC) 
 LIBFT_INC = -I $(LIBFT_DIR)
 MLX_INC = -I $(MLX_DIR)
 LIBFT_LINK = -L $(LIBFT_DIR) -l ft -l pthread

@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 18:42:52 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/17 12:01:13 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:53:25 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,11 @@ int	manage_mouse(int button, int x, int y, t_fractal *fractal)
 //	t_complex	d;
 
 	zm = 0;
-	mouse.rl_x = scaling(x, WIDTH, fractal->min.rl_x, fractal->max.rl_x);
-	mouse.im_y = scaling(y, HEIGHT, fractal->min.im_y, fractal->max.im_y);
-	if (button == Button5)
+//	mouse.rl_x = scaling(x, WIDTH, fractal->min.rl_x, fractal->max.rl_x);
+//	mouse.im_y = scaling(y, HEIGHT, fractal->min.im_y, fractal->max.im_y);
+	mouse.rl_x = x;
+	mouse.im_y = y;
+if (button == Button5)
 		zm = 1.05;
 	else if (button == Button4)
 		zm = 0.95;

@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 21:02:03 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/06 20:33:48 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/17 14:12:35 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,13 @@ void	palette_def(t_palette *palette, t_fractal *fractal)
 	else if (fractal->palette.val == 2)
 		*palette = array[1];
 	return ;
+}
+
+int	manage_key(int key, t_fractal *fractal)
+{
+	if (key == 65288 || key == 32 || key == XK_Tab)
+		manage_more(key, fractal);
+	else
+		manage_some(key, fractal);
+	return (0);
 }
