@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:00:07 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/17 14:12:08 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:36:45 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,14 @@ typedef struct	s_colour
 	uint8_t	g;
 	uint8_t	b;
 }	t_colour;
+
+typedef struct	s_mouse
+{
+	double	off_minx;
+	double	off_maxx;
+	double	off_miny;
+	double	off_maxy;
+}	t_mouse;
 
 void		fractal_init(t_fractal *fractal);
 void		malloc_err(void);

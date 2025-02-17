@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 18:42:52 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/17 13:53:25 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/17 17:37:48 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,43 @@ int	manage_mouse(int button, int x, int y, t_fractal *fractal)
 {
 	double		zm;
 	t_complex	mouse;
-//	t_complex	d;
+//	double		new_w;
+//	double		new_h;
+	t_complex	left;
+	t_complex	right;
+//	t_mouse		m;
 
-	zm = 0;
-//	mouse.rl_x = scaling(x, WIDTH, fractal->min.rl_x, fractal->max.rl_x);
-//	mouse.im_y = scaling(y, HEIGHT, fractal->min.im_y, fractal->max.im_y);
-	mouse.rl_x = x;
-	mouse.im_y = y;
-if (button == Button5)
+	mouse.rl_x = scaling(x, WIDTH, fractal->min.rl_x, fractal->max.rl_x);
+	mouse.im_y = scaling(y, HEIGHT, fractal->min.im_y, fractal->max.im_y);
+	left.rl_x = (mouse.rl_x - fractal->min.rl_x)/(fractal->max.rl_x - fractal->min.rl_x);
+	left.im_y = (mouse.im_y - fractal->max.im_y)/(fractal->min.im_y - fractal->max.im_y);
+	right.rl_x = 1 - left.rl_x;
+	right.im_y = 1 - left.im_y;
+	
+//	m.off_minx = fractal->min.rl_x + mouse.rl_x;
+//	m.off_maxx = fractal->max.rl_x + mouse.rl_x;
+//	m.off_miny = fractal->min.im_y + mouse.im_y;
+//	m.off_maxy = fractal->max.im_y + mouse.im_y;
+//	if
+//	printf("Mouse Clicked at: x = %d, y = %d\n", x, y);
+//	printf("Fractal Boundaries: min.rl_x = %f, max.rl_x = %f\n", fractal->min.rl_x, fractal->max.rl_x);
+//	printf("Fractal Boundaries: min.im_y = %f, max.im_y = %f\n", fractal->min.im_y, fractal->max.im_y);
+//	printf("Mapped Mouse: rl_x = %f, im_y = %f\n", mouse.rl_x, mouse.im_y);	
+	if (button == Button5)
 		zm = 1.05;
 	else if (button == Button4)
 		zm = 0.95;
 	else
 		return (0);
-	fractal->min.rl_x = mouse.rl_x + (fractal->min.rl_x - mouse.rl_x) * zm;
-	fractal->max.rl_x = mouse.rl_x + (fractal->max.rl_x - mouse.rl_x) * zm;
-	fractal->min.im_y = mouse.im_y + (fractal->min.im_y - mouse.im_y) * zm;
-	fractal->max.im_y = mouse.im_y + (fractal->max.im_y - mouse.im_y) * zm;
+//	new_w = (fractal->max.rl_x - fractal->min.rl_x) * zm;
+//	new_h = (fractal->max.im_y - fractal->min.im_y) * zm;
+	fractal->min.rl_x = mouse.rl_x - (mouse.rl_x - fractal->min.rl_x) * zm * left.rl_x;
+	printf("%f %f\n", mouse.rl_x, fractal->min.rl_x);
+	fractal->max.rl_x = mouse.rl_x - (mouse.rl_x - fractal->max.rl_x) * zm * right.rl_x;
+	//fractal->max.rl_x = fractal->min.rl_x + new_w;
+	fractal->min.im_y = mouse.im_y - ( mouse.im_y - fractal->max.im_y) * zm * left.im_y;
+	fractal->max.im_y = mouse.im_y - ( mouse.im_y - fractal->min.im_y) * zm * right.im_y;
+	//fractal->max.im_y = fractal->min.im_y + new_h;
 	fractal->zoom *= zm;
 	fractal_render(fractal);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 21:02:03 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/17 14:12:35 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/17 14:50:29 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@ void	def_data(t_fractal *fractal)
 {
 	fractal->escape_val = 2 * 2;
 	fractal->image_def = 50;
+	fractal->min.rl_x = -2.0;
+	fractal->max.rl_x = 2.0;
+	fractal->min.im_y = 2.0;
+	fractal->max.im_y = -2.0;
 	fractal->shift_x = 0;
 	fractal->shift_y = 0;
 	fractal->zoom = 1;
+	fractal->smooth = 1;
+	fractal->motion = 1;
 	fractal->palette.val = 1;
 	palette_def(&fractal->palette, fractal);
 }
@@ -26,7 +32,7 @@ void	def_data(t_fractal *fractal)
 void	events_init(t_fractal *fractal)
 {
 	mlx_hook(fractal->mlx_window, KeyPress, KeyPressMask, manage_key, fractal);
-	mlx_hook(fractal->mlx_window, ButtonPress, ButtonPress, manage_mouse, fractal);
+	mlx_hook(fractal->mlx_window, ButtonPress, ButtonPressMask, manage_mouse, fractal);
 	mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask, manage_exit, fractal);
 	if (ft_strncmp(fractal->name, "Julia", 5) == 0)
 		mlx_hook(fractal->mlx_window, MotionNotify, PointerMotionMask, manage_track, fractal);
