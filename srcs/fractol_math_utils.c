@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:59:28 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/17 14:04:08 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/21 14:43:36 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_complex	c_sum(t_complex z_sq, t_complex c)
 {
 	t_complex	sum;
 
-
 	sum.rl_x = z_sq.rl_x + c.rl_x;
 	sum.im_y = z_sq.im_y + c.im_y;
 	return (sum);
@@ -36,15 +35,14 @@ t_complex	c_sum(t_complex z_sq, t_complex c)
 
 t_complex	c_square(t_complex z)
 {
-	t_complex sq;
-	
-	//complex square = (x^2 - y^2) + 2xyi
+	t_complex	sq;
+
 	sq.rl_x = (z.rl_x * z.rl_x) - (z.im_y * z.im_y);
 	sq.im_y = 2 * (z.rl_x * z.im_y);
 	return (sq);
 }
 
-int		lin_interpol(int start_val, int end_val, double point)
+int	lin_interpol(int start_val, int end_val, double point)
 {
 	int	inter_val;
 

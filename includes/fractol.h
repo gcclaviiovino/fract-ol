@@ -6,14 +6,16 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:00:07 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/17 15:36:45 by liovino          ###   ########.fr       */
+/*   Updated: 2025/03/26 17:36:09 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define ERROR_MESS "Problem with request...Please enter \n\t\"./fractol Mandelbrot\" or \n\t\"./fractol Julia <value_x> <value_y>\""
+# define ERROR_MESS "Problem with request...Please enter \n\t\"./fractol Mandelbrot\" \
+					or \n\t\"./fractol Julia <value_x> <value_y>\" \
+					or \n\t\"./fractol absolute\""
 
 # define WIDTH 600
 # define HEIGHT 600
@@ -43,14 +45,14 @@ typedef struct s_complex
 
 typedef struct s_image
 {
-	void	*image_ptr; //pointer to image struct
-	char	*pix_ptr; //points to the actual pixel, will use it to change pixels in image
-	int		bytes_pp; //how many bytes for pixel (should be 32)
+	void	*image_ptr;
+	char	*pix_ptr;
+	int		bytes_pp;
 	int		line_len;
 	int		endian;
 }	t_image;
 
-typedef struct	s_palette
+typedef struct s_palette
 {
 	int		val;
 	uint8_t	tot;
@@ -77,7 +79,7 @@ typedef struct s_fractal
 	t_complex	min;
 }	t_fractal;
 
-typedef struct	s_colour
+typedef struct s_colour
 {
 	int		val;
 	uint8_t	r;
@@ -85,13 +87,11 @@ typedef struct	s_colour
 	uint8_t	b;
 }	t_colour;
 
-typedef struct	s_mouse
+typedef struct s_vals
 {
-	double	off_minx;
-	double	off_maxx;
-	double	off_miny;
-	double	off_maxy;
-}	t_mouse;
+	t_complex	z;
+	t_complex	c;
+}	t_vals;
 
 void		fractal_init(t_fractal *fractal);
 void		malloc_err(void);
@@ -102,8 +102,8 @@ void		fractal_render(t_fractal *fractal);
 void		manage_pixel(double x, double y, t_fractal *fractal);
 void		show_pixel(int x, int y, t_image *img, int colour);
 void		def_data(t_fractal *fractal);
-void		mandelbrot_def(double x, double y, t_complex *z, t_complex *c, t_fractal *fractal);
-void		julia_def(double x, double y, t_complex *z, t_complex *c, t_fractal *fractal);
+void		mandel_def(double x, double y, t_vals *vals, t_fractal *fractal);
+void		julia_def(double x, double y, t_vals *vals, t_fractal *fractal);
 double		ft_atodec(char *str);
 void		events_init(t_fractal *fractal);
 int			manage_key(int key, t_fractal *fractal);
@@ -119,5 +119,6 @@ t_colour	blend(t_colour base_c, t_colour next_c, double inter_val);
 void		palette_def(t_palette *palette, t_fractal *fractal);
 int			lin_interpol(int start_val, int end_val, double point);
 t_colour	ft_itoc(int hex);
+void		absolute_def(double x, double y, t_vals *vals, t_fractal *fractal);
 
 #endif

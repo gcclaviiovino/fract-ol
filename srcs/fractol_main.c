@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:48:27 by liovino           #+#    #+#             */
-/*   Updated: 2025/02/03 16:09:57 by liovino          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:48:31 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	main(int argc, char **argv)
 	t_fractal	fractal;
 
 	if ((argc == 2 && (ft_strncmp(argv[1], "Mandelbrot", 10)) == 0) \
-		|| (argc == 4 && (ft_strncmp(argv[1], "Julia", 5)) == 0))
+		|| (argc == 4 && (ft_strncmp(argv[1], "Julia", 5)) == 0) \
+		|| (argc == 2 && (ft_strncmp(argv[1], "absolute", 8)) == 0))
 	{
 		fractal.name = argv[1];
 		if (argc == 4)
@@ -29,8 +30,6 @@ int	main(int argc, char **argv)
 		fractal_render(&fractal);
 		mlx_loop(fractal.mlx_connect);
 	}
-//	else if (argc == 2 && (ft_strncmp(argv[1], "", lenfrattale)) == 0)
-		// fai e chiama funzione per altro frattale
 	else
 	{
 		ft_putstr_fd(ERROR_MESS, 2);
