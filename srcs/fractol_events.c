@@ -6,7 +6,7 @@
 /*   By: liovino <liovino@student.42.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 18:42:52 by liovino           #+#    #+#             */
-/*   Updated: 2025/03/26 17:17:11 by liovino          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:13:27 by liovino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	manage_some(int key, t_fractal *fractal)
 {
 	double	shift_factor;
 
-	shift_factor = (fractal->max.rl_x - fractal->min.rl_x) * 0.05;
+	shift_factor = 2 * fractal->zoom;
 	if (key == XK_Escape)
 		manage_exit(fractal);
 	if (key == XK_Left)
